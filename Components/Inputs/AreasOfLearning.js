@@ -15,12 +15,9 @@ export default class AreasOfLearning extends Component {
     };
   }
 
-  handleCheck = () => {
-
-  };
-
   render() {
-    return (<View>
+    return (
+    <View>
       <View style={styles.view}>
         <CheckBox
           value= {this.state.checked1}
