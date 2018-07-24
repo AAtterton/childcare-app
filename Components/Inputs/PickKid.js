@@ -32,14 +32,15 @@ export default class PickKids extends React.Component {
 
   renderPicker() {
     let kidsNames = this.state.kidsNames.map(i => (<Picker.Item key={i} label={i} value={i}/>));
-    return (<Picker selectedValue={this.state.kid} onValueChange={this.updateKid.bind(this)}>
+    return (<Picker selectedValue={this.state.kid} onValueChange={this.updateKid}>
       {kidsNames}
     </Picker>);
   }
 
-  updateKid(kid) {
+  updateKid = (kid) => {
     this.setState({ kid });
-  }
+    this.props.onValueChange(kid);
+  };
 
   render() {
     return <View>{this.renderPicker()}</View>;

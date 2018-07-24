@@ -22,6 +22,7 @@ export default class ChildApp extends Component {
     this.state = {
       report: '',
       nextSteps: '',
+      kid: '',
     };
   }
 
@@ -32,7 +33,11 @@ export default class ChildApp extends Component {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ main_report: this.state.report, next_steps: this.state.nextSteps }),
+      body: JSON.stringify({
+        main_report: this.state.report,
+        next_steps: this.state.nextSteps,
+        kid: this.state.kid,
+      }),
     });
   };
 
@@ -49,7 +54,7 @@ export default class ChildApp extends Component {
           <AreasOfLearning/>
         </View>
         <View style={styles.rightbot}>
-          <PickKids/>
+          <PickKids onValueChange={value => this.setState({ kid: value })}/>
           <Photo/>
           <TouchableOpacity onPress={this.submitReport} style={{
               height: 49,

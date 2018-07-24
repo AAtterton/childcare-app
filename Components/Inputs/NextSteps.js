@@ -10,8 +10,7 @@ export default class NextSteps extends Component {
         underlineColorAndroid='transparent'
         style={styles.NextSteps}
         placeholder="Next Steps"
-        onChangeText= {(text) => this.setState({ text })}/>
-
+        onChangeText= {this.props.onChange}/>
       <Text style={styles.text}></Text>
     </View>);
   }
@@ -19,7 +18,6 @@ export default class NextSteps extends Component {
 
 const styles = StyleSheet.create({
   view: {
-
     backgroundColor: 'white',
   },
   NextSteps: {
