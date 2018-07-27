@@ -32,7 +32,7 @@ export default class Photo extends Component {
 
 const styles = StyleSheet.create({
   view: {
-    backgroundColor: 'powderblue',
+    backgroundColor: 'white',
   },
   button: {
     borderWidth: 1,

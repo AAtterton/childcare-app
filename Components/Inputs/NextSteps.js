@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   NextSteps: {
     borderWidth: 2,
-    height: 130,
+    height: 110,
     width: 300,
     padding: 10,
   },
