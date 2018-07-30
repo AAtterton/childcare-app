@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Text,
-  TextInput,
-  View,
-  StyleSheet,
-  CheckBox,
-  TouchableOpacity
-} from 'react-native';
+import { AppRegistry, Text, View, StyleSheet, CheckBox, TouchableOpacity } from 'react-native';
 
 import MainReport from '../Inputs/MainReport';
 import NextSteps from '../Inputs/NextSteps';
-import AreasOfLearning from '../Inputs/AreasOfLearning';
 import Photo from '../Inputs/Photo';
 import PickKids from '../Inputs/PickKid';
 
@@ -131,7 +122,9 @@ export default class ReportSubmit extends Component {
         <View style={styles.buttonwrapper}>
           <PickKids style={styles.picker} onValueChange={value => this.setState({ kid: value })}/>
           <Photo style={styles.photo}/>
-          <TouchableOpacity onPress={this.submitReport} style={styles.submitbutton}/>
+          <TouchableOpacity onPress={this.submitReport} style={styles.submitbutton}>
+            <Text style={styles.buttontext}>Submit</Text>
+          </TouchableOpacity>
         </View>
 
         </View>
@@ -142,6 +135,7 @@ export default class ReportSubmit extends Component {
 
 const styles = StyleSheet.create({
   mainview: {
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -171,8 +165,13 @@ const styles = StyleSheet.create({
   },
   submitbutton: {
     height: 40,
-    backgroundColor: 'blue',
+    backgroundColor: 'lightgrey',
     marginTop: 20,
+  },
+  buttontext: {
+    marginTop: 10,
+    fontSize: 15,
+    textAlign: 'center',
   },
 });
 

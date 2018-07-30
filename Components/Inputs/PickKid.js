@@ -46,3 +46,5 @@ export default class PickKids extends React.Component {
     return <View>{this.renderPicker()}</View>;
   }
 }
+
+AppRegistry.registerComponent('PickKids', () => PickKids);

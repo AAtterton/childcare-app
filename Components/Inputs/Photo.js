@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Text,
-  TextInput,
-  View,
-  StyleSheet,
-  Picker,
-  TouchableNativeFeedback
-} from 'react-native';
+import { AppRegistry, Text, View, StyleSheet, TouchableNativeFeedback } from 'react-native';
 
 export default class Photo extends Component {
   constructor(props) {
@@ -43,4 +35,4 @@ const styles = StyleSheet.create({
   text: {},
 });
 
-AppRegistry.registerComponent('ReportDate', () => Photo);
+AppRegistry.registerComponent('Photo', () => Photo);

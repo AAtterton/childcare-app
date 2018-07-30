@@ -17,34 +17,41 @@ export default class Login extends React.Component {
   }
 
   checkLogin = () => {
+
     const name = this.state.username;
     const passcode = this.state.passcode;
-    return fetch('http://192.168.0.11:3000/api/parents/user_name/' + name + '/passcode/' + passcode)
-    .then(responce => responce.json())
-    .then(responceJson => {
-      console.log(responceJson.passcode);
-      if (responceJson.passcode === 'true') {
-        return this.props.navigation.navigate('ReportSubmit');
-      }
-    });
+    const staffid = this.state.staffid;
+    if (staffid == '') {
+      return fetch('http://192.168.0.11:3000/api/parents/user_name/' + name + '/passcode/' + passcode)
+      .then(responce => responce.json())
+      .then(responceJson => {
+        if (responceJson.passcode === 'true') {
+          return this.props.navigation.navigate('ParentHome');
+        }
+      });
+    } else {
+      return fetch('http://192.168.0.11:3000/api/staffmembers/user_name/' + name + '/passcode/' + passcode + '/staff_ID/' + staffid)
+      .then(responce => responce.json())
+      .then(responceJson => {
+        if (responceJson.passcode === 'true') {
+          return this.props.navigation.navigate('StaffHome');
+        }
+      });
+    }
   };
 
   render() {
-    return (
-      <View style={styles.container}>
-        <View>
-          <UserName onChange={value => this.setState({ username: value })}/>
-          <Passcode onChange={value => this.setState({ passcode: value })}/>
-          <StaffID onChange={value => this.setState({ staffid: value })}/>
-          <TouchableOpacity onPress={this.checkLogin}
-          style={{
-              height: 50,
-              backgroundColor: 'blue',
-            }}/>
+    return (<View style={styles.container}>
+      <View>
+        <UserName onChange={value => this.setState({ username: value })}/>
+        <Passcode onChange={value => this.setState({ passcode: value })}/>
+        <StaffID onChange={value => this.setState({ staffid: value })}/>
+        <TouchableOpacity onPress={this.checkLogin} style={styles.button}>
+          <Text style={styles.buttontext}>Login</Text>
+        </TouchableOpacity>
 
-        </View>
       </View>
-    );
+    </View>);
   }
 }
 
@@ -54,6 +61,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  button: {
+    height: 40,
+    backgroundColor: 'lightgrey',
+  },
+  buttontext: {
+    marginLeft: 12,
+    marginTop: 10,
+    fontSize: 15,
   },
 });
 
