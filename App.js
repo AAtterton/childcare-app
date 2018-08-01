@@ -23,7 +23,7 @@ const RootStack = createStackNavigator(
     ParentHome: ParentHome,
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'StaffAdmin',
   }
 );
 

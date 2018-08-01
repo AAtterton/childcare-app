@@ -4,6 +4,7 @@ import { AppRegistry, StyleSheet, Text, View, TouchableOpacity, Picker } from 'r
 import Passcode from '../Inputs/Passcode';
 import StaffID from '../Inputs/StaffID';
 import UserName from '../Inputs/UserName';
+import CustomPicker from '../Inputs/CustomPicker';
 
 export default class StaffAdmin extends React.Component {
 
@@ -30,20 +31,22 @@ export default class StaffAdmin extends React.Component {
     this.setState({ personType });
   };
 
-  renderPicker() {
-    let pickNames = this.state.personTypes.map(i => (<Picker.Item key={i} label={i} value={i}/>));
+  renderPicker = (labels, style) => {
+    let pickNames = labels.map(i => (<Picker.Item key={i} label={i} value={i}/>));
     return (<Picker
+              style={style}
               selectedValue={this.state.personType}
               onValueChange={this.updatePerTyp}>
               {pickNames}
       </Picker>
     );
-  }
+  };
 
   render() {
     return (<View style={styles.container}>
+
       <View>
-      {/*TODO: DOB component*/}
+        {/*TODO: DOB component*/}
         <UserName onChange={value => this.setState({ username: value })}/>
         <Passcode onChange={value => this.setState({ passcode: value })}/>
         <StaffID onChange={value => this.setState({ staffid: value })}/>
@@ -53,15 +56,16 @@ export default class StaffAdmin extends React.Component {
             <Text style={styles.buttontext}>Submit</Text>
           </TouchableOpacity>
           {/*TODO: json of all objects according to selection*/}
-          {/*TODO: move this to a new component*/}
-          {/*TODO: Ask tom if I can pass in a style and an array of labels*/}
-          {/*TODO: this.renderpicker(style, labels)*/}
-          <View style={styles.pickpertype}>{this.renderPicker()}</View>
+          <CustomPicker
+            labels={this.state.personTypes}
+            style={styles.pickpertype}
+          />
         </View>
         {/*TODO: Display all objects according to personType*/}
-        <Picker style={styles.pickerper}>
-          <Picker.Item label='Pick a Person Here'/>
-        </Picker>
+        <CustomPicker
+          labels={['Pick a Person Here']}
+          style={styles.pickerper}
+        />
       </View>
     </View>);
   }
