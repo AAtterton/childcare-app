@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Picker
-} from 'react-native';
+import { AppRegistry, View, Picker, } from 'react-native';
 
 export default class CustomPicker extends React.Component {
 
@@ -19,7 +12,8 @@ export default class CustomPicker extends React.Component {
   }
 
   updateSelectedValue = (selectedValue) => {
-    this.setState({ selectedValue });
+    this.setState({ selectedValue: selectedValue });
+    this.props.onChange(selectedValue);
   };
 
   CustomPicker = (labels, style) => {
@@ -36,7 +30,9 @@ export default class CustomPicker extends React.Component {
   render() {
     return (
       <View>
-        {this.CustomPicker(this.props.labels, this.props.style)}
+        {this.CustomPicker(
+          this.props.labels,
+          this.props.style)}
       </View>
     );
   }

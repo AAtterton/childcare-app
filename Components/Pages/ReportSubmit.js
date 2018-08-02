@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, View, StyleSheet, CheckBox, TouchableOpacity } from 'react-native';
 
-import MainReport from '../Inputs/MainReport';
-import NextSteps from '../Inputs/NextSteps';
-import Photo from '../Inputs/Photo';
 import PickKids from '../Inputs/PickKid';
+import CustomPicker from '../Inputs/CustomPicker';
+import CustomTextInput from '../Inputs/CustomTextInput';
+import CustomButton from '../Inputs/CustomButton';
 
 export default class ReportSubmit extends Component {
 
@@ -50,14 +50,19 @@ export default class ReportSubmit extends Component {
     return (
       <View style={styles.mainview}>
 
-
       <View>
-        <MainReport onChange={value => this.setState({ report: value })}/>
-        <NextSteps onChange={value => this.setState({ nextSteps: value })}/>
+      <CustomTextInput
+        placeholderText={'MainReport'}
+        style={styles.textInput}
+        onChange={value => this.setState({ report: value })}
+        />
+      <CustomTextInput
+        placeholderText={'NextSteps'}
+        style={styles.textInput}
+        onChange={value => this.setState({ nextSteps: value })}
+        />
       </View>
-
       <View style={styles.bottomwrapper}>
-
       <View style={styles.checkboxwrapper}>
 
         <View style={styles.checkboxes}>
@@ -121,13 +126,20 @@ export default class ReportSubmit extends Component {
 
         <View style={styles.buttonwrapper}>
           <PickKids style={styles.picker} onValueChange={value => this.setState({ kid: value })}/>
-          <Photo style={styles.photo}/>
-          <TouchableOpacity onPress={this.submitReport} style={styles.submitbutton}>
-            <Text style={styles.buttontext}>Submit</Text>
-          </TouchableOpacity>
+          <CustomButton
+            style={styles.button}
+            textStyle={styles.buttontext}
+            buttonText={'Photo'}
+            onPress={this._onPressButton}
+            />
+          <CustomButton
+            style={styles.button}
+            textStyle={styles.buttontext}
+            buttonText={'Submit'}
+            onPress={this.submitReport}
+            />
         </View>
-
-        </View>
+      </View>
 
     </View>);
   }
@@ -163,15 +175,23 @@ const styles = StyleSheet.create({
   photo: {
     marginTop: 20,
   },
-  submitbutton: {
+  button: {
+    width: 130,
     height: 40,
     backgroundColor: 'lightgrey',
-    marginTop: 20,
+    marginTop: 10,
   },
   buttontext: {
     marginTop: 10,
     fontSize: 15,
     textAlign: 'center',
+  },
+  textInput: {
+    borderWidth: 2,
+    height: 130,
+    width: 300,
+    padding: 10,
+    marginTop: 4,
   },
 });
 

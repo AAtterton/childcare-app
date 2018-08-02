@@ -1,17 +1,19 @@
 import React from 'react';
-import { AppRegistry, StyleSheet, Text, View, TouchableOpacity, Picker } from 'react-native';
+import { AppRegistry, StyleSheet, View, } from 'react-native';
 
-import Passcode from '../Inputs/Passcode';
-import StaffID from '../Inputs/StaffID';
-import UserName from '../Inputs/UserName';
 import CustomPicker from '../Inputs/CustomPicker';
+import CustomTextInput from '../Inputs/CustomTextInput';
+import CustomButton from '../Inputs/CustomButton';
 
 export default class StaffAdmin extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      username: '',
+      firstName: '',
+      secondName: '',
+      DOB: '',
+      userName: '',
       passcode: '',
       staffid: '',
       personType: '',
@@ -20,45 +22,62 @@ export default class StaffAdmin extends React.Component {
         'Parents',
         'Kids',
       ],
+      people: [],
     };
   }
 
   submitInfo = () => {
-      alert('Write a Function');
+      alert(this.state.personType);
     };
 
-  updatePerTyp = (personType) => {
-    this.setState({ personType });
-  };
-
-  renderPicker = (labels, style) => {
-    let pickNames = labels.map(i => (<Picker.Item key={i} label={i} value={i}/>));
-    return (<Picker
-              style={style}
-              selectedValue={this.state.personType}
-              onValueChange={this.updatePerTyp}>
-              {pickNames}
-      </Picker>
-    );
-  };
-
   render() {
-    return (<View style={styles.container}>
-
+    return (
+      <View style={styles.container}>
       <View>
-        {/*TODO: DOB component*/}
-        <UserName onChange={value => this.setState({ username: value })}/>
-        <Passcode onChange={value => this.setState({ passcode: value })}/>
-        <StaffID onChange={value => this.setState({ staffid: value })}/>
+        <CustomTextInput
+          placeholderText={'First Name'}
+          style={styles.textInput}
+          onChange={value => this.setState({ firstName: value })}
+          />
+        <CustomTextInput
+          placeholderText={'Second Name'}
+          style={styles.textInput}
+          onChange={value => this.setState({ secondName: value })}
+          />
+        <CustomTextInput
+          placeholderText={'Date of Birth'}
+          style={styles.textInput}
+          onChange={value => this.setState({ DOB: value })}
+          />
+        <CustomTextInput
+          placeholderText={'User Name'}
+          style={styles.textInput}
+          onChange={value => this.setState({ userName: value })}
+          />
+        <CustomTextInput
+          placeholderText={'Password'}
+          style={styles.textInput}
+          onChange={value => this.setState({ passcode: value })}
+          />
+        <CustomTextInput
+          placeholderText={'Staff ID'}
+          style={styles.textInput}
+          onChange={value => this.setState({ staffid: value })}
+          />
+
         <View style={styles.pickerwrap}>
           {/*TODO: submitInfo function for buttton*/}
-          <TouchableOpacity onPress={this.submitInfo} style={styles.button}>
-            <Text style={styles.buttontext}>Submit</Text>
-          </TouchableOpacity>
+          <CustomButton
+            style={styles.button}
+            textStyle={styles.buttontext}
+            buttonText={'Submit'}
+            onPress={this.submitInfo}
+            />
           {/*TODO: json of all objects according to selection*/}
           <CustomPicker
             labels={this.state.personTypes}
             style={styles.pickpertype}
+            onChange={value => this.setState({ personType: value })}
           />
         </View>
         {/*TODO: Display all objects according to personType*/}
@@ -81,6 +100,7 @@ const styles = StyleSheet.create({
   pickerwrap: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: 4,
   },
   pickpertype: {
     width: 130,
@@ -97,6 +117,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 15,
     textAlign: 'center',
+  },
+  textInput: {
+    borderWidth: 2,
+    height: 40,
+    width: 300,
+    padding: 10,
+    marginTop: 4,
   },
 });
 
