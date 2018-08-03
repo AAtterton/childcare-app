@@ -54,17 +54,17 @@ export default class Login extends React.Component {
       <CustomTextInput
         placeholderText={'UserName'}
         style={styles.textInput}
-        onChange={value => this.setState({ UserName: value })}
+        onChange={value => this.setState({ username: value })}
         />
       <CustomTextInput
         placeholderText={'Passcode'}
         style={styles.textInput}
-        onChange={value => this.setState({ Passcode: value })}
+        onChange={value => this.setState({ passcode: value })}
         />
       <CustomTextInput
         placeholderText={'StaffID'}
         style={styles.textInput}
-        onChange={value => this.setState({ StaffID: value })}
+        onChange={value => this.setState({ staffid: value })}
         />
       <CustomButton
         style={styles.button}
