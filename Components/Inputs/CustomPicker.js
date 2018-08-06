@@ -13,7 +13,6 @@ export default class CustomPicker extends React.Component {
 
   updateSelectedValue = (selectedValue) => {
     this.setState({ selectedValue: selectedValue });
-    console.log(selectedValue);
     this.props.onChange(selectedValue);
   };
 

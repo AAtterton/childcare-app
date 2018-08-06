@@ -7,8 +7,9 @@ export default class CustomTextInput extends Component {
     this.props.onChange(value);
   };
 
-  CustomTextInput = (placeholderText, style) => {
+  CustomTextInput = (placeholderText, style, value) => {
     return (<TextInput
+      value={value}
       placeholderTextColor="black"
       underlineColorAndroid="transparent"
       style={style}
@@ -20,7 +21,10 @@ export default class CustomTextInput extends Component {
   render() {
     return (
       <View>
-        {this.CustomTextInput(this.props.placeholderText, this.props.style)}
+        {this.CustomTextInput(
+          this.props.placeholderText,
+          this.props.style,
+          this.props.value)}
       </View>);
   }
 }
