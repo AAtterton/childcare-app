@@ -13,6 +13,7 @@ export default class CustomPicker extends React.Component {
 
   updateSelectedValue = (selectedValue) => {
     this.setState({ selectedValue: selectedValue });
+    console.log(selectedValue);
     this.props.onChange(selectedValue);
   };
 
@@ -32,7 +33,8 @@ export default class CustomPicker extends React.Component {
       <View>
         {this.CustomPicker(
           this.props.labels,
-          this.props.style)}
+          this.props.style,
+          )}
       </View>
     );
   }

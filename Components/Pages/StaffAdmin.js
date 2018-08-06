@@ -26,6 +26,27 @@ export default class StaffAdmin extends React.Component {
     };
   }
 
+  fetchPeople = (personType) => {
+    this.setState({ personType: personType });
+    if (personType === 'Staff') {
+      personType = 'staffmembers';
+    }
+
+    var names = [];
+    return fetch('http://192.168.0.11:3000/api/' + personType)
+    .then(response => response.json())
+    .then(responseJson => {
+      for (i = 0; i < responseJson.length; i++) {
+        name = responseJson[i].first_name + ' ' + responseJson[i].last_name;
+        names.push(name);
+      }
+
+      this.setState({ people: names });
+    }).catch(error => {
+      console.error(error);
+    });
+  };
+
   submitInfo = () => {
       alert(this.state.personType);
     };
@@ -72,19 +93,19 @@ export default class StaffAdmin extends React.Component {
             textStyle={styles.buttontext}
             buttonText={'Submit'}
             onPress={this.submitInfo}
-            />
+          />
           {/*TODO: json of all objects according to selection*/}
           <CustomPicker
             labels={this.state.personTypes}
             style={styles.pickpertype}
-            onChange={value => this.setState({ personType: value })}
+            onChange={value => this.fetchPeople(value)}
           />
         </View>
         {/*TODO: Display all objects according to personType*/}
-        <CustomPicker
-          labels={['Pick a Person Here']}
-          style={styles.pickerper}
-        />
+          <CustomPicker
+            labels={this.state.people}
+            style={styles.pickerper}
+          />
       </View>
     </View>);
   }

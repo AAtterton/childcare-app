@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View, StyleSheet, CheckBox, TouchableOpacity } from 'react-native';
+import { AppRegistry, Text, View, StyleSheet, CheckBox } from 'react-native';
 
-import PickKids from '../Inputs/PickKid';
+import KidPicker from '../Inputs/KidPicker';
 import CustomPicker from '../Inputs/CustomPicker';
 import CustomTextInput from '../Inputs/CustomTextInput';
 import CustomButton from '../Inputs/CustomButton';
@@ -47,97 +47,97 @@ export default class ReportSubmit extends Component {
   };
 
   render() {
-    return (
-      <View style={styles.mainview}>
+    return (<View style={styles.mainview}>
 
       <View>
-      <CustomTextInput
-        placeholderText={'MainReport'}
-        style={styles.textInput}
-        onChange={value => this.setState({ report: value })}
-        />
-      <CustomTextInput
-        placeholderText={'NextSteps'}
-        style={styles.textInput}
-        onChange={value => this.setState({ nextSteps: value })}
-        />
+        <CustomTextInput
+          placeholderText={'MainReport'}
+          style={styles.textInput}
+          onChange={value => this.setState({ report: value })}
+          />
+        <CustomTextInput
+          placeholderText={'NextSteps'}
+          style={styles.textInput}
+          onChange={value => this.setState({ nextSteps: value })}
+          />
       </View>
       <View style={styles.bottomwrapper}>
-      <View style={styles.checkboxwrapper}>
+        <View style={styles.checkboxwrapper}>
 
-        <View style={styles.checkboxes}>
-          <CheckBox
-            value= {this.state.checked1}
-            onChange={() => this.setState({ checked1: !this.state.checked1 })}
+          <View style={styles.checkboxes}>
+            <CheckBox
+              value={this.state.checked1}
+              onChange={() => this.setState({ checked1: !this.state.checked1 })}
             />
-          <Text style={styles.checkboxtext}>PSE Dev</Text>
-        </View>
+            <Text style={styles.checkboxtext}>PSE Dev</Text>
+          </View>
 
-        <View style={styles.checkboxes}>
-          <CheckBox
-            value= {this.state.checked2}
-            onChange={() => this.setState({ checked2: !this.state.checked2 })}
+          <View style={styles.checkboxes}>
+            <CheckBox
+              value={this.state.checked2}
+              onChange={() => this.setState({ checked2: !this.state.checked2 })}
             />
-          <Text style={styles.checkboxtext}>Phyis Dev</Text>
-        </View>
+            <Text style={styles.checkboxtext}>Phyis Dev</Text>
+          </View>
 
-        <View style={styles.checkboxes}>
-          <CheckBox
-          value= {this.state.checked3}
-          onChange={() => this.setState({ checked3: !this.state.checked3 })}
-          />
-          <Text style={styles.checkboxtext}>Comm and Lang</Text>
-        </View>
+          <View style={styles.checkboxes}>
+            <CheckBox
+              value={this.state.checked3}
+              onChange={() => this.setState({ checked3: !this.state.checked3 })}
+            />
+            <Text style={styles.checkboxtext}>Comm and Lang</Text>
+          </View>
 
-        <View style={styles.checkboxes}>
-        <CheckBox
-          value= {this.state.checked4}
-          onChange={() => this.setState({ checked4: !this.state.checked4 })}
-          />
-          <Text style={styles.checkboxtext}>Literacy</Text>
-        </View>
+          <View style={styles.checkboxes}>
+            <CheckBox
+              value={this.state.checked4}
+              onChange={() => this.setState({ checked4: !this.state.checked4 })}
+            />
+            <Text style={styles.checkboxtext}>Literacy</Text>
+          </View>
 
-        <View style={styles.checkboxes}>
-        <CheckBox
-          value= {this.state.checked5}
-          onChange={() => this.setState({ checked5: !this.state.checked5 })}
-          />
-          <Text style={styles.checkboxtext}>Mathematics</Text>
-        </View>
+          <View style={styles.checkboxes}>
+            <CheckBox
+              value={this.state.checked5}
+              onChange={() => this.setState({ checked5: !this.state.checked5 })}
+            />
+            <Text style={styles.checkboxtext}>Mathematics</Text>
+          </View>
 
-        <View style={styles.checkboxes}>
-        <CheckBox
-          title= 'The World'
-          value= {this.state.checked6}
-          onChange={() => this.setState({ checked6: !this.state.checked6 })}
-          />
-          <Text style={styles.checkboxtext}>The World</Text>
-        </View>
+          <View style={styles.checkboxes}>
+            <CheckBox
+              value={this.state.checked6}
+              onChange={() => this.setState({ checked6: !this.state.checked6 })}
+            />
+            <Text style={styles.checkboxtext}>The World</Text>
+          </View>
 
-        <View style={styles.checkboxes}>
-        <CheckBox
-          value= {this.state.checked7}
-          onChange={() => this.setState({ checked7: !this.state.checked7 })}
-          />
-          <Text style={styles.checkboxtext}>Arts and Design</Text>
-        </View>
+          <View style={styles.checkboxes}>
+            <CheckBox
+              value={this.state.checked7}
+              onChange={() => this.setState({ checked7: !this.state.checked7 })}
+            />
+            <Text style={styles.checkboxtext}>Arts and Design</Text>
+          </View>
 
         </View>
 
         <View style={styles.buttonwrapper}>
-          <PickKids style={styles.picker} onValueChange={value => this.setState({ kid: value })}/>
+          <KidPicker
+            style={styles.picker}
+            onChange={value => this.setState({ kid: value })}/>
           <CustomButton
             style={styles.button}
             textStyle={styles.buttontext}
             buttonText={'Photo'}
             onPress={this._onPressButton}
-            />
+          />
           <CustomButton
             style={styles.button}
             textStyle={styles.buttontext}
             buttonText={'Submit'}
             onPress={this.submitReport}
-            />
+          />
         </View>
       </View>
 
@@ -153,8 +153,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
   },
-  checkboxwrapper: {
-  },
+  checkboxwrapper: {},
   checkboxes: {
     flexDirection: 'row',
   },
@@ -169,9 +168,7 @@ const styles = StyleSheet.create({
     width: 300,
     justifyContent: 'space-between',
   },
-  picker: {
-
-  },
+  picker: {},
   photo: {
     marginTop: 20,
   },

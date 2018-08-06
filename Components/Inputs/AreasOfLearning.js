@@ -5,15 +5,21 @@ export default class AreasOfLearning extends Component {
   constructor() {
     super();
     this.state = {
-      checked1: false,
-      checked2: false,
-      checked3: false,
-      checked4: false,
-      checked5: false,
-      checked6: false,
-      checked7: false,
+      checkBoxStatus: {
+        checked1: false,
+        checked2: false,
+        checked3: false,
+        checked4: false,
+        checked5: false,
+        checked6: false,
+        checked7: false,
+      },
     };
   }
+
+  CustomCheckBox = () => {
+
+  };
 
   render() {
     return (
@@ -22,6 +28,7 @@ export default class AreasOfLearning extends Component {
         <CheckBox
           value= {this.state.checked1}
           onChange={() => this.setState({ checked1: !this.state.checked1 })}
+
           />
         <Text style={styles.text}>PSE Dev</Text>
       </View>
