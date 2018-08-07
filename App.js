@@ -4,8 +4,8 @@ import { createStackNavigator } from 'react-navigation';
 
 import Login from './Components/Pages/Login';
 import ReportSubmit from './Components/Pages/ReportSubmit';
-import StaffHome from './Components/Pages/StaffHome';
-import StaffAdmin from './Components/Pages/StaffAdmin';
+import EmployeeHome from './Components/Pages/EmployeeHome';
+import EmployeeAdmin from './Components/Pages/EmployeeAdmin';
 import ReportViewer from './Components/Pages/ReportViewer';
 import PhotoViewer from './Components/Pages/PhotoViewer';
 import PhotoUpload from './Components/Pages/PhotoUpload';
@@ -16,8 +16,8 @@ const RootStack = createStackNavigator(
   {
     Login: Login,
     ReportSubmit: ReportSubmit,
-    StaffHome: StaffHome,
-    StaffAdmin: StaffAdmin,
+    EmployeeHome: EmployeeHome,
+    EmployeeAdmin: EmployeeAdmin,
     ReportViewer: ReportViewer,
     PhotoViewer: PhotoViewer,
     PhotoUpload: PhotoUpload,
@@ -25,7 +25,7 @@ const RootStack = createStackNavigator(
     Test: Test,
   },
   {
-    initialRouteName: 'StaffHome',
+    initialRouteName: 'EmployeeHome',
   }
 );
 

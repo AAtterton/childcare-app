@@ -5,7 +5,7 @@ import CustomPicker from '../Inputs/CustomPicker';
 import CustomTextInput from '../Inputs/CustomTextInput';
 import CustomButton from '../Inputs/CustomButton';
 
-export default class StaffAdmin extends React.Component {
+export default class EmployeeAdmin extends React.Component {
 
   constructor() {
     super();
@@ -15,12 +15,12 @@ export default class StaffAdmin extends React.Component {
       DOB: '',
       userName: '',
       passcode: '',
-      staffid: '',
+      employeeid: '',
       personIndex: '',
       personID: '',
       personType: '',
       personTypes: [
-        'Staff',
+        'Employees',
         'Parents',
         'Kids',
       ],
@@ -30,10 +30,6 @@ export default class StaffAdmin extends React.Component {
 
   fetchPeople = (personType) => {
     this.setState({ personType: personType });
-    if (personType === 'Staff') {
-      personType = 'staffmembers';
-    }
-
     const names = [];
     return fetch('http://192.168.0.11:3000/api/' + personType)
     .then(response => response.json())
@@ -61,13 +57,9 @@ export default class StaffAdmin extends React.Component {
         this.setState({ DOB: '' });
         this.setState({ userName: '' });
         this.setState({ passcode: '' });
-        this.setState({ staffid: '' });
+        this.setState({ employeeid: '' });
       } else {
         let personType = this.state.personType;
-        if (personType === 'Staff') {
-          personType = 'staffmembers';
-        }
-
         return fetch('http://192.168.0.11:3000/api/' + personType)
         .then(response => response.json())
         .then(responceJson => {
@@ -82,14 +74,15 @@ export default class StaffAdmin extends React.Component {
     this.setState({ DOB: data.dob });
     this.setState({ userName: data.user_name });
     this.setState({ passcode: data.passcode });
-    this.setState({ staffid: data.staff_ID });
+    this.setState({ employeeid: data.employee_ID });
     this.setState({ personID: data._id });
   };
 
   submitInfo = () => {
-    if (this.state.personIndex = 0) {
-      const personType = this.state.personType;
-      const personID = this.state.personID;
+    const personType = this.state.personType;
+    const personID = this.state.personID;
+    if (this.state.personIndex != 0) {
+      console.log(this.state.personIndex);
       fetch('http://192.168.0.11:3000/api/' + personType + '/' + personID, {
         method: 'PUT',
         headers: {
@@ -102,11 +95,11 @@ export default class StaffAdmin extends React.Component {
           dob: this.state.DOB,
           user_name: this.state.userName,
           passcode: this.state.passcode,
-          staff_ID: this.state.staffid,
+          employee_ID: this.state.employeeid,
         }),
       });
+
     } else {
-      const personType = this.state.personType;
       fetch('http://192.168.0.11:3000/api/' + personType, {
         method: 'POST',
         headers: {
@@ -119,11 +112,31 @@ export default class StaffAdmin extends React.Component {
           dob: this.state.DOB,
           user_name: this.state.userName,
           passcode: this.state.passcode,
-          staff_ID: this.state.staffid,
+          employee_ID: this.state.employeeid,
         }),
       });
     }
 
+    this.fetchPeople(personType);
+  };
+
+  deleteInfo = () => {
+    const personType = this.state.personType;
+    const personID = this.state.personID;
+    if (this.state.personIndex != 0) {
+
+      fetch('http://192.168.0.11:3000/api/' + personType + '/' + personID, {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
+    } else {
+      alert('Can not delete a new record until it is submitted');
+    }
+
+    this.fetchPeople(personType);
   };
 
   render() {
@@ -161,10 +174,10 @@ export default class StaffAdmin extends React.Component {
           onChange={value => this.setState({ passcode: value })}
           />
         <CustomTextInput
-          value={this.state.staffid}
-          placeholderText={'Staff ID'}
+          value={this.state.employeeid}
+          placeholderText={'Employee ID'}
           style={styles.textInput}
-          onChange={value => this.setState({ staffid: value })}
+          onChange={value => this.setState({ employeeid: value })}
           />
 
         <View style={styles.pickerwrap}>
@@ -182,18 +195,26 @@ export default class StaffAdmin extends React.Component {
             onChange={value => this.fetchPeople(value)}
           />
         </View>
+        <View style={styles.pickerwrap}>
         {/*TODO: Display all objects according to personType*/}
+          <CustomButton
+            style={styles.button}
+            textStyle={styles.buttontext}
+            buttonText={'Delete'}
+            onPress={this.deleteInfo}
+          />
           <CustomPicker
             labels={this.state.people}
             style={styles.pickerper}
             onChange={value => this.fetchIndividual(value)}
           />
+        </View>
       </View>
     </View>);
   }
 
   componentDidMount() {
-    return this.fetchPeople('Staff');
+    return this.fetchPeople('employees');
   }
 }
 
@@ -213,7 +234,7 @@ const styles = StyleSheet.create({
     width: 130,
   },
   pickerper: {
-
+    width: 130,
   },
   button: {
     height: 40,
@@ -234,4 +255,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('StaffAdmin', () => StaffAdmin);
+AppRegistry.registerComponent('EmployeeAdmin', () => EmployeeAdmin);

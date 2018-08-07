@@ -11,7 +11,7 @@ export default class Login extends React.Component {
     this.state = {
       username: '',
       passcode: '',
-      staffid: '',
+      employeeid: '',
     };
   }
 
@@ -19,28 +19,28 @@ export default class Login extends React.Component {
 
     const name = this.state.username;
     const passcode = this.state.passcode;
-    const staffid = this.state.staffid;
+    const employeeid = this.state.employeeid;
     if (name == '' || passcode == '') {
       alert('Please provide a username and password');
     } else {
-      if (staffid == '') {
+      if (employeeid == '') {
         return fetch('http://192.168.0.11:3000/api/parents/user_name/' + name + '/passcode/' + passcode)
         .then(responce => responce.json())
         .then(responceJson => {
           if (responceJson.user_name === 'true' && responceJson.passcode === 'true') {
             return this.props.navigation.navigate('ParentHome');
           } else {
-            alert('Incorrect username or password please try again or supply a staff ID');
+            alert('Incorrect username or password please try again or supply a employee ID');
           }
         });
       } else {
-        return fetch('http://192.168.0.11:3000/api/staffmembers/user_name/' + name + '/passcode/' + passcode + '/staff_ID/' + staffid)
+        return fetch('http://192.168.0.11:3000/api/employeemembers/user_name/' + name + '/passcode/' + passcode + '/employee_ID/' + employeeid)
         .then(responce => responce.json())
         .then(responceJson => {
-          if (responceJson.passcode === 'true' && responceJson.staff_ID == 'true') {
-            return this.props.navigation.navigate('StaffHome');
+          if (responceJson.passcode === 'true' && responceJson.employee_ID == 'true') {
+            return this.props.navigation.navigate('EmployeeHome');
           } else {
-            alert('Incorrect username, password or staff ID please try again');
+            alert('Incorrect username, password or employee ID please try again');
           }
         });
       }
@@ -62,9 +62,9 @@ export default class Login extends React.Component {
         onChange={value => this.setState({ passcode: value })}
         />
       <CustomTextInput
-        placeholderText={'StaffID'}
+        placeholderText={'Employee ID'}
         style={styles.textInput}
-        onChange={value => this.setState({ staffid: value })}
+        onChange={value => this.setState({ employeeid: value })}
         />
       <CustomButton
         style={styles.button}

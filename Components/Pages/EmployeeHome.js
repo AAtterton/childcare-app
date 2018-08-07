@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppRegistry, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-export default class StaffHome extends React.Component {
+export default class EmployeeHome extends React.Component {
 
   constructor() {
     super();
@@ -15,11 +15,11 @@ export default class StaffHome extends React.Component {
       <View style={styles.wrapper}>
         <TouchableOpacity
         onPress={() => {
-          this.props.navigation.navigate('StaffAdmin');
+          this.props.navigation.navigate('EmployeeAdmin');
         }
       }
             style={styles.button}>
-          <Text style={styles.buttontext}>Staff Admin Panel</Text>
+          <Text style={styles.buttontext}>Employee Admin Panel</Text>
         </TouchableOpacity>
         <TouchableOpacity
             onPress={ () => {
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     height: 160,
-    width: 160,
+    width: 180,
     justifyContent: 'space-between',
   },
   button: {
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('StaffHome', () => StaffHome);
+AppRegistry.registerComponent('EmployeeHome', () => EmployeeHome);
