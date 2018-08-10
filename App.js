@@ -10,7 +10,6 @@ import ReportViewer from './Components/Pages/ReportViewer';
 import PhotoViewer from './Components/Pages/PhotoViewer';
 import PhotoUpload from './Components/Pages/PhotoUpload';
 import ParentHome from './Components/Pages/ParentHome';
-import Test from './Components/Pages/Test';
 
 const RootStack = createStackNavigator(
   {
@@ -22,7 +21,7 @@ const RootStack = createStackNavigator(
     PhotoViewer: PhotoViewer,
     PhotoUpload: PhotoUpload,
     ParentHome: ParentHome,
-    Test: Test,
+
   },
   {
     initialRouteName: 'EmployeeHome',

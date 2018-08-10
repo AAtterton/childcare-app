@@ -34,7 +34,7 @@ export default class Login extends React.Component {
           }
         });
       } else {
-        return fetch('http://192.168.0.11:3000/api/employeemembers/user_name/' + name + '/passcode/' + passcode + '/employee_ID/' + employeeid)
+        return fetch('http://192.168.0.11:3000/api/employees/user_name/' + name + '/passcode/' + passcode + '/employee_ID/' + employeeid)
         .then(responce => responce.json())
         .then(responceJson => {
           if (responceJson.passcode === 'true' && responceJson.employee_ID == 'true') {

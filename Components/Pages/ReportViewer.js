@@ -6,43 +6,55 @@ export default class ReportViewer extends React.Component {
   constructor() {
     super();
     this.state = {
-      reports: [
-        {
-          _id: '1',
-          date: '02/01/2018',
-          name: 'Andy',
-        },
-        {
-          _id: '2',
-          date: '02/01/2018',
-          name: 'Andy',
-        },
-        {
-          _id: '3',
-          date: '02/01/2018',
-          name: 'Andy',
-        },
-        {
-          _id: '4',
-          date: '02/01/2018',
-          name: 'Andy',
-        },
-      ],
+      reports: '',
+      displayList: '',
     };
   }
+
+  fetchReports = () =>
+    fetch('http://192.168.0.11:3000/api/reports')
+    .then(response => response.json())
+    .then(responseJson => {
+      this.setState({ reports: responseJson });
+      const displayList = [];
+
+      for (i = 0; i < responseJson.length; i++) {
+        const value = this.dateSort(responseJson[i].report_date.slice(0, 10));
+        console.log(value);
+        const display = {
+          _id: responseJson[i]._id,
+          name: responseJson[i].kid,
+          date: value,
+        };
+        displayList.push(display);
+      }
+
+      this.setState({ displayList: displayList });
+    });
+
+  dateSort = (dateString) =>
+    dateString.split('-')
+    .reverse()
+    .join('-')
+    .replace('-', '/')
+    .replace('-', '/');
 
   // TODO: onclick for flatlist??
   render() {
     return (
       <View style={styles.container}>
-        <FlatList data={this.state.reports} renderItem={({ item }) =>
+        <FlatList data={this.state.displayList} renderItem={({ item }) =>
         <View style={styles.flatlist}>
-          <Text style={styles.itemtext}>{item.date}</Text>
           <Text style={styles.itemtext}>{item.name}</Text>
+          <Text style={styles.itemtext}>{item.date}</Text>
         </View>}
         keyExtractor={item => item._id}
         />
     </View>);
+  }
+
+  componentDidMount() {
+    return this.fetchReports();
   }
 }
 
