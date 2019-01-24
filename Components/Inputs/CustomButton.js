@@ -3,16 +3,20 @@ import { AppRegistry, TouchableOpacity, View, Text } from 'react-native';
 
 export default class CustomButton extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   updateText = (value) => {
     this.props.onChange(value);
   };
 
   CustomButton = (style, textStyle, buttonText, onPress) => {
-    return (<TouchableOpacity
+    return (<card
       style={style}
       onPress={onPress}>
         <Text style={textStyle}>{buttonText}</Text>
-      </TouchableOpacity>
+      </card>
     );
   };
 
